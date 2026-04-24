@@ -17,20 +17,20 @@ export const CompassNavigation = () => {
         </div>
 
         {/* Compass-style circular layout for larger screens */}
-        <div className="hidden lg:block relative max-w-7xl mx-auto">
+        <div className="hidden lg:block relative w-full mx-auto" style={{ maxWidth: "1600px" }}>
           <div className="relative aspect-square">
             {/* Central compass */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-card border-2 border-primary flex items-center justify-center z-10 shadow-lg">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-card border-2 border-primary flex items-center justify-center z-10 shadow-lg">
               <div className="text-center">
-                <div className="font-serif text-3xl font-semibold text-primary">Анализ</div>
-                <div className="text-base text-muted-foreground">через форму</div>
+                <div className="font-serif text-5xl font-semibold text-primary">Анализ</div>
+                <div className="text-2xl text-muted-foreground mt-2">через форму</div>
               </div>
             </div>
 
             {/* Module circles arranged radially */}
             {courseStructure.map((module, index) => {
               const angle = (index / courseStructure.length) * 2 * Math.PI - Math.PI / 2;
-              const radius = 36; // percentage
+              const radius = 40; // percentage — pushed outward to avoid overlap
               const x = 50 + radius * Math.cos(angle);
               const y = 50 + radius * Math.sin(angle);
 
@@ -39,10 +39,10 @@ export const CompassNavigation = () => {
                   key={module.id}
                   to={module.lessons[0]?.path || "/"}
                   className={cn(
-                    "absolute w-56 h-56 -translate-x-1/2 -translate-y-1/2 rounded-xl",
+                    "absolute w-64 h-64 -translate-x-1/2 -translate-y-1/2 rounded-xl",
                     "bg-card border border-border shadow-sm",
-                    "hover:shadow-lg hover:scale-110 hover:border-accent/50",
-                    "transition-all duration-300 flex flex-col items-center justify-center p-4",
+                    "hover:shadow-lg hover:scale-105 hover:border-accent/50",
+                    "transition-all duration-300 flex flex-col items-center justify-center p-5",
                     "group cursor-pointer"
                   )}
                   style={{
@@ -51,12 +51,12 @@ export const CompassNavigation = () => {
                   }}
                 >
                   <div
-                    className="w-16 h-16 rounded-full mb-2 flex items-center justify-center text-white font-semibold text-2xl"
+                    className="w-24 h-24 rounded-full mb-4 flex items-center justify-center text-white font-semibold text-4xl"
                     style={{ backgroundColor: `hsl(var(--${module.color}))` }}
                   >
                     {module.id}
                   </div>
-                  <div className="text-sm font-medium text-foreground text-center line-clamp-2 group-hover:text-accent transition-colors">
+                  <div className="text-lg font-medium text-foreground text-center line-clamp-2 group-hover:text-accent transition-colors leading-tight">
                     {module.title}
                   </div>
                 </Link>
@@ -67,7 +67,7 @@ export const CompassNavigation = () => {
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
               {courseStructure.map((module, index) => {
                 const angle = (index / courseStructure.length) * 2 * Math.PI - Math.PI / 2;
-                const radius = 36;
+                const radius = 40;
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
 
