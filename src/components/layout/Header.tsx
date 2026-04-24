@@ -1,0 +1,118 @@
+import { Link, useLocation } from "react-router-dom";
+import { Compass, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+
+export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="container flex h-16 items-center justify-between">
+        <Link 
+          to="/" 
+          className="flex items-center gap-3 transition-opacity hover:opacity-80"
+        >
+          <div className="relative">
+            <Compass className="h-8 w-8 text-primary" />
+            <div className="absolute inset-0 animate-pulse-subtle">
+              <Compass className="h-8 w-8 text-accent opacity-30" />
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <span className="font-serif text-xl font-semibold text-foreground">
+              Calculus Compass
+            </span>
+            <span className="text-xs text-muted-foreground">
+              Математический анализ
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-6">
+          <Link
+            to="/"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-accent",
+              isHome ? "text-accent" : "text-muted-foreground"
+            )}
+          >
+            Главная
+          </Link>
+          <Link
+            to="/module/0/function-definition"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-accent",
+              location.pathname.startsWith("/module/") ? "text-accent" : "text-muted-foreground"
+            )}
+          >
+            Уроки
+          </Link>
+          <Link
+            to="/guide/0"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-accent",
+              location.pathname.startsWith("/guide/") ? "text-accent" : "text-muted-foreground"
+            )}
+          >
+            Гид
+          </Link>
+          <Link
+            to="/visualizations/integral"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-accent",
+              location.pathname.startsWith("/visualizations/") ? "text-accent" : "text-muted-foreground"
+            )}
+          >
+            Визуализации
+          </Link>
+          <Link
+            to="/functions/polynomial"
+            className={cn(
+              "text-sm font-medium transition-colors hover:text-accent",
+              location.pathname.startsWith("/functions/") ? "text-accent" : "text-muted-foreground"
+            )}
+          >
+            Справочник
+          </Link>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 text-foreground"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden border-t border-border bg-background">
+          <nav className="container py-4 flex flex-col gap-4">
+            {[
+              { to: "/", label: "Главная" },
+              { to: "/module/0/function-definition", label: "Уроки" },
+              { to: "/guide/0", label: "Интерактивный гид" },
+              { to: "/visualizations/integral", label: "Визуализации" },
+              { to: "/functions/polynomial", label: "Справочник функций" },
+            ].map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                className="text-sm font-medium text-foreground hover:text-accent"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};

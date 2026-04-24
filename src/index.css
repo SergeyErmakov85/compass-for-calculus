@@ -1,0 +1,415 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Academic Indigo Theme */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 15%;
+
+    /* Deep academic blue */
+    --primary: 210 50% 25%;
+    --primary-foreground: 210 20% 98%;
+
+    /* Soft blue-gray */
+    --secondary: 210 15% 92%;
+    --secondary-foreground: 215 25% 25%;
+
+    --muted: 210 15% 95%;
+    --muted-foreground: 215 15% 45%;
+
+    /* Warm gold accent - compass metaphor */
+    --accent: 38 85% 55%;
+    --accent-foreground: 38 90% 15%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 88%;
+    --input: 210 20% 88%;
+    --ring: 210 50% 35%;
+
+    --radius: 0.625rem;
+
+    /* Custom semantic colors */
+    --function-1: 220 70% 50%;
+    --function-1-foreground: 220 100% 98%;
+    --function-2: 340 70% 50%;
+    --function-2-foreground: 340 100% 98%;
+
+    /* Module colors (calculus-compass-08) */
+    --module-0: 230 50% 55%;
+    --module-1: 260 50% 55%;
+    --module-2: 290 45% 50%;
+    --module-3: 320 50% 50%;
+    --module-4: 340 55% 50%;
+    --module-5: 15 65% 50%;
+    --module-6: 35 70% 50%;
+    --module-7: 55 65% 45%;
+    --module-8: 120 40% 45%;
+    --module-9: 175 55% 40%;
+    --module-10: 200 55% 50%;
+    
+    --graph-bg: 210 25% 97%;
+    --graph-grid: 210 15% 85%;
+    --graph-axis: 210 20% 40%;
+    --graph-primary: 230 65% 50%;
+    --graph-secondary: 340 70% 55%;
+    --graph-tertiary: 45 85% 55%;
+    --graph-quaternary: 175 60% 40%;
+    
+    --compass-gold: 38 85% 55%;
+    --compass-gold-light: 38 80% 75%;
+    --compass-blue: 210 50% 25%;
+    
+    --success: 150 60% 40%;
+    --success-foreground: 150 60% 98%;
+
+    /* Shadows */
+    --shadow-soft: 0 2px 8px -2px hsl(215 25% 15% / 0.08);
+    --shadow-medium: 0 4px 16px -4px hsl(215 25% 15% / 0.12);
+    --shadow-strong: 0 8px 32px -8px hsl(215 25% 15% / 0.16);
+
+    /* Sidebar */
+    --sidebar-background: 210 20% 98%;
+    --sidebar-foreground: 215 25% 25%;
+    --sidebar-primary: 210 50% 25%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 38 85% 55%;
+    --sidebar-accent-foreground: 38 90% 15%;
+    --sidebar-border: 210 20% 88%;
+    --sidebar-ring: 210 50% 35%;
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 210 20% 95%;
+
+    --card: 220 18% 13%;
+    --card-foreground: 210 20% 95%;
+
+    --popover: 220 18% 13%;
+    --popover-foreground: 210 20% 95%;
+
+    --primary: 210 60% 60%;
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 220 15% 20%;
+    --secondary-foreground: 210 20% 90%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 210 15% 60%;
+
+    --accent: 38 80% 55%;
+    --accent-foreground: 38 90% 10%;
+
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 210 60% 50%;
+
+    --function-1: 220 80% 65%;
+    --function-2: 340 80% 65%;
+    
+    --graph-bg: 220 18% 12%;
+    --graph-grid: 220 15% 25%;
+    --graph-axis: 210 20% 60%;
+    --graph-primary: 230 70% 65%;
+    --graph-secondary: 340 75% 65%;
+    --graph-tertiary: 45 90% 60%;
+    --graph-quaternary: 175 65% 50%;
+
+    --sidebar-background: 220 18% 12%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 210 60% 60%;
+    --sidebar-primary-foreground: 220 20% 10%;
+    --sidebar-accent: 38 80% 55%;
+    --sidebar-accent-foreground: 38 90% 10%;
+    --sidebar-border: 220 15% 22%;
+    --sidebar-ring: 210 60% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Crimson Pro', serif;
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  .text-math {
+    font-family: 'Crimson Pro', serif;
+    @apply italic;
+  }
+
+  .card-elevated {
+    @apply bg-card rounded-xl border border-border;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .card-elevated:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
+  }
+
+  .function-1-badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+    background-color: hsl(var(--function-1) / 0.15);
+    color: hsl(var(--function-1));
+    border: 1px solid hsl(var(--function-1) / 0.3);
+  }
+
+  .function-2-badge {
+    @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+    background-color: hsl(var(--function-2) / 0.15);
+    color: hsl(var(--function-2));
+    border: 1px solid hsl(var(--function-2) / 0.3);
+  }
+
+  .graph-container {
+    @apply rounded-xl p-4 border border-border;
+    background-color: hsl(var(--graph-bg));
+  }
+
+  .compass-glow {
+    box-shadow: 0 0 40px hsl(var(--compass-gold) / 0.3);
+  }
+
+  .module-card {
+    @apply relative overflow-hidden rounded-xl border border-border bg-card p-6;
+    transition: all 0.3s ease;
+  }
+
+  .module-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0;
+    background: linear-gradient(135deg, hsl(var(--accent) / 0.1), transparent);
+    transition: opacity 0.3s ease;
+  }
+
+  .module-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .module-card:hover {
+    @apply border-accent;
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-4px);
+  }
+
+  .progress-bar {
+    @apply h-1.5 rounded-full overflow-hidden;
+    background-color: hsl(var(--muted));
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    transition: width 0.5s ease;
+  }
+
+  .screen-indicator {
+    @apply w-2 h-2 rounded-full transition-all duration-300;
+  }
+
+  .screen-indicator.active {
+    @apply w-6;
+    background-color: hsl(var(--accent));
+  }
+
+  .screen-indicator.completed {
+    background-color: hsl(var(--success));
+  }
+
+  .screen-indicator.pending {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+  }
+
+  .slider-custom {
+    @apply h-2 rounded-full cursor-pointer;
+    background: linear-gradient(90deg, hsl(var(--primary) / 0.2), hsl(var(--accent) / 0.4));
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-all duration-200;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.85));
+    color: hsl(var(--primary-foreground));
+    box-shadow: 0 4px 14px hsl(var(--primary) / 0.25);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px hsl(var(--primary) / 0.35);
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center rounded-lg px-6 py-3 font-medium transition-all duration-200;
+    background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent) / 0.85));
+    color: hsl(var(--accent-foreground));
+    box-shadow: 0 4px 14px hsl(var(--accent) / 0.3);
+  }
+
+  .btn-accent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px hsl(var(--accent) / 0.4);
+  }
+
+  .fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+
+  .slide-up {
+    animation: slideUp 0.6s ease forwards;
+  }
+
+  .scale-in {
+    animation: scaleIn 0.4s ease forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+/* From calculus-compass-08 */
+@layer components {
+  .lesson-card {
+    @apply p-6 bg-card rounded-xl border border-border shadow-sm
+           hover:shadow-md hover:border-accent/30 transition-all duration-300;
+  }
+
+  .math-formula {
+    @apply font-mono text-lg text-primary bg-secondary/50 px-4 py-2 rounded-lg
+           border border-border inline-block;
+  }
+
+  .module-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+           bg-primary/10 text-primary;
+  }
+
+  .compass-card {
+    @apply relative flex flex-col p-5 rounded-xl border border-border bg-card
+           shadow-soft overflow-hidden
+           hover:shadow-medium hover:border-accent/40 hover:-translate-y-1
+           transition-all duration-300;
+    animation: fade-in 0.5s ease backwards;
+  }
+
+  .section-divider {
+    @apply border-t border-border my-8;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+  }
+
+  .animate-compass-spin {
+    animation: compass-spin 20s linear infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulse-subtle 3s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease forwards;
+  }
+}
+
+@keyframes compass-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
