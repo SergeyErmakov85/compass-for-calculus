@@ -7,30 +7,30 @@ export const CompassNavigation = () => {
     <section className="py-16">
       <div className="container">
         <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-4">
+          <h2 className="font-serif text-4xl md:text-6xl font-semibold text-foreground mb-4">
             Навигация по курсу
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Каждый модуль раскрывает новый аспект математического анализа. 
             Начните с основ и двигайтесь к сложным концепциям.
           </p>
         </div>
 
         {/* Compass-style circular layout for larger screens */}
-        <div className="hidden lg:block relative max-w-4xl mx-auto">
+        <div className="hidden lg:block relative max-w-7xl mx-auto">
           <div className="relative aspect-square">
             {/* Central compass */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-card border-2 border-primary flex items-center justify-center z-10 shadow-lg">
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-card border-2 border-primary flex items-center justify-center z-10 shadow-lg">
               <div className="text-center">
-                <div className="font-serif text-lg font-semibold text-primary">Анализ</div>
-                <div className="text-xs text-muted-foreground">через форму</div>
+                <div className="font-serif text-3xl font-semibold text-primary">Анализ</div>
+                <div className="text-base text-muted-foreground">через форму</div>
               </div>
             </div>
 
             {/* Module circles arranged radially */}
             {courseStructure.map((module, index) => {
               const angle = (index / courseStructure.length) * 2 * Math.PI - Math.PI / 2;
-              const radius = 42; // percentage
+              const radius = 36; // percentage
               const x = 50 + radius * Math.cos(angle);
               const y = 50 + radius * Math.sin(angle);
 
@@ -39,10 +39,10 @@ export const CompassNavigation = () => {
                   key={module.id}
                   to={module.lessons[0]?.path || "/"}
                   className={cn(
-                    "absolute w-28 h-28 -translate-x-1/2 -translate-y-1/2 rounded-xl",
+                    "absolute w-56 h-56 -translate-x-1/2 -translate-y-1/2 rounded-xl",
                     "bg-card border border-border shadow-sm",
                     "hover:shadow-lg hover:scale-110 hover:border-accent/50",
-                    "transition-all duration-300 flex flex-col items-center justify-center p-2",
+                    "transition-all duration-300 flex flex-col items-center justify-center p-4",
                     "group cursor-pointer"
                   )}
                   style={{
@@ -51,12 +51,12 @@ export const CompassNavigation = () => {
                   }}
                 >
                   <div
-                    className="w-8 h-8 rounded-full mb-1 flex items-center justify-center text-white font-semibold text-sm"
+                    className="w-16 h-16 rounded-full mb-2 flex items-center justify-center text-white font-semibold text-2xl"
                     style={{ backgroundColor: `hsl(var(--${module.color}))` }}
                   >
                     {module.id}
                   </div>
-                  <div className="text-xs font-medium text-foreground text-center line-clamp-2 group-hover:text-accent transition-colors">
+                  <div className="text-sm font-medium text-foreground text-center line-clamp-2 group-hover:text-accent transition-colors">
                     {module.title}
                   </div>
                 </Link>
@@ -67,7 +67,7 @@ export const CompassNavigation = () => {
             <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
               {courseStructure.map((module, index) => {
                 const angle = (index / courseStructure.length) * 2 * Math.PI - Math.PI / 2;
-                const radius = 42;
+                const radius = 36;
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
 
