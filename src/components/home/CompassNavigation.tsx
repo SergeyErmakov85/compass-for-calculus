@@ -64,24 +64,43 @@ export const CompassNavigation = () => {
             })}
 
             {/* Connecting lines */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100">
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 100" preserveAspectRatio="none">
+              <defs>
+                <marker
+                  id="compass-arrow"
+                  viewBox="0 0 10 10"
+                  refX="8"
+                  refY="5"
+                  markerWidth="5"
+                  markerHeight="5"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="hsl(var(--primary))" />
+                </marker>
+              </defs>
               {courseStructure.map((module, index) => {
                 const angle = (index / courseStructure.length) * 2 * Math.PI - Math.PI / 2;
                 const radius = 42;
+                // Card is w-56 (224px) inside ~1336px container ≈ 8.4 viewBox units half-width.
+                // Stop the line just before the card edge so the arrow head lands on the rectangle.
+                const cardHalf = 8.6;
                 const x = 50 + radius * Math.cos(angle);
                 const y = 50 + radius * Math.sin(angle);
+                const endX = x - cardHalf * Math.cos(angle);
+                const endY = y - cardHalf * Math.sin(angle);
 
                 return (
                   <line
                     key={module.id}
                     x1="50"
                     y1="50"
-                    x2={x}
-                    y2={y}
-                    stroke="hsl(var(--accent))"
+                    x2={endX}
+                    y2={endY}
+                    stroke="hsl(var(--primary))"
                     strokeWidth="0.4"
                     strokeDasharray="1.2 1"
-                    strokeOpacity="0.7"
+                    strokeOpacity="0.85"
+                    markerEnd="url(#compass-arrow)"
                   />
                 );
               })}
